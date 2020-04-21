@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 3637601446775341307}
   - component: {fileID: 3637601446775341311}
   - component: {fileID: 3637601446775341310}
+  - component: {fileID: 8948806387432777875}
   m_Layer: 2
   m_Name: PlayerCharacterController
   m_TagString: Player
@@ -108,6 +109,20 @@ MonoBehaviour:
   Drag: {x: 0, y: 0, z: 0}
   GroundChecker: {fileID: 3637601447471835763}
   PlayerFront: {fileID: 1233691222}
+--- !u!136 &8948806387432777875
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3637601446775341297}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 0.56304264
+  m_Height: 1.9404533
+  m_Direction: 1
+  m_Center: {x: 0, y: -0.07454789, z: 0.063042656}
 --- !u!1 &3637601447129179840
 GameObject:
   m_ObjectHideFlags: 0

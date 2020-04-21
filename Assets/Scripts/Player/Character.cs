@@ -212,4 +212,16 @@ public class Character : MonoBehaviour
         }
         return false;
     }
+
+    private void OnTriggerStay(Collider other)
+    {
+        if (Input.GetKey(KeyCode.E))
+        {
+            Pickable obj = other.gameObject.GetComponent<Pickable>();
+            if (obj != null)
+            {
+                obj.Pick();
+            }
+        }
+    }
 }
