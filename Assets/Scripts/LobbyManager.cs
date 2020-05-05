@@ -113,12 +113,12 @@ namespace Com.MyCompany.MyGame
             {
                 if (textManager.text == nickname)
                 {
-                    buttonManager.interactable = true;
+                    buttonManager.interactable = buttonPlayer.interactable;
                     textManager.text = "";
                 }
                 else if (textPlayer.text == nickname)
                 {
-                    buttonPlayer.interactable = true;
+                    buttonPlayer.interactable = buttonManager.interactable;
                     textPlayer.text = "";
                 }
             }
