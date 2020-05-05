@@ -39,8 +39,11 @@ namespace SeriousCorona
             get => gameState;
             set
             {
-                gameState = value;
-                HandleGamestate();
+                if(gameState != value)
+                {
+                    gameState = value;
+                    HandleGamestate();
+                }
             }
         }
 
@@ -72,7 +75,7 @@ namespace SeriousCorona
                 }
                 else
                 {
-                    finishButton.SetActive(false);
+                    //finishButton.SetActive(false);
                     //playerHandler.gameObject.SetActive(false);
                 }
             }
@@ -83,6 +86,7 @@ namespace SeriousCorona
                 //playerObject.SetActive(true);
                 if (role == Role.PLAYER)
                 {
+                    print("init");
                     PhotonNetwork.Instantiate(PREFAB_NAME, spawnPlayer.transform.position, spawnPlayer.transform.rotation);
                     //playerHandler.gameObject.SetActive(true);                    
                 }
@@ -112,6 +116,7 @@ namespace SeriousCorona
             }
            else
             {
+                print("State changed " + role); 
                 GameStateP = (GameState)stream.ReceiveNext();
             }
         }
