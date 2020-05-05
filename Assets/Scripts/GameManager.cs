@@ -97,7 +97,6 @@ namespace SeriousCorona
         {
             print("next phase");
             GameStateP = GameState.PLAYING;
-            HandleGamestate();
         }
 
         void Update()
