@@ -6,15 +6,18 @@ using Photon.Realtime;
 
 namespace SeriousCorona
 {
-    public class GameManager : MonoBehaviour
+    public class GameManager : MonoBehaviour, IPunObservable
     {
-        // Start is called before the first frame update
         public Role role;
 
         public static GameManager instance;
 
         [SerializeField]
         private ManagerHandler managerHandler;
+        [SerializeField]
+        private GameObject managerCamera;
+        [SerializeField]
+        private GameObject finishButton;
 
         [SerializeField]
         private PlayerHandler playerHandler;
@@ -26,7 +29,17 @@ namespace SeriousCorona
             PLANNING,
             PLAYING
         }
-        public GameState gameState;
+        private GameState gameState;
+
+        public GameState GameStateP
+        {
+            get => gameState;
+            set
+            {
+                gameState = value;
+                HandleGamestate();
+            }
+        }
 
         void Start()
         {
@@ -40,13 +53,13 @@ namespace SeriousCorona
             {
                 playerHandler = FindObjectOfType<PlayerHandler>();
             }
-            gameState = GameState.PLANNING;
+            GameStateP = GameState.PLANNING;
 
         }
 
         private void HandleGamestate()
         {
-            if (gameState == GameState.PLANNING)
+            if (GameStateP == GameState.PLANNING)
             {
                 if (role == Role.MANAGER)
                 {
@@ -57,8 +70,10 @@ namespace SeriousCorona
                     playerHandler.gameObject.SetActive(false);
                 }
             }
-            else if (gameState == GameState.PLAYING)
+            else if (GameStateP == GameState.PLAYING)
             {
+                managerCamera.SetActive(false);
+                finishButton.SetActive(false);
                 playerObject.SetActive(true);
                 if (role == Role.PLAYER)
                 {
@@ -74,15 +89,25 @@ namespace SeriousCorona
         public void FinishPlanning()
         {
             print("next phase");
-            gameState = GameState.PLAYING;
+            GameStateP = GameState.PLAYING;
             HandleGamestate();
         }
 
-
-        // Update is called once per frame
         void Update()
         {
 
+        }
+
+        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
+        {
+           if(stream.IsWriting)
+            {
+                stream.SendNext(GameStateP);
+            }
+           else
+            {
+                GameStateP = (GameState)stream.ReceiveNext();
+            }
         }
     }
 }
