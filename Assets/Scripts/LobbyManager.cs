@@ -21,7 +21,7 @@ namespace Com.MyCompany.MyGame
         MANAGER
     }
 
-    public class LobbyManager : MonoBehaviourPunCallbacks, IPunObservable
+    public class LobbyManager : MonoBehaviourPunCallbacks
     {
 
         #region Private Serialize Fields
@@ -84,25 +84,7 @@ namespace Com.MyCompany.MyGame
             PhotonNetwork.SetPlayerCustomProperties(playerProperties);
             //PhotonNetwork.LocalPlayer.CustomProperties = playerProperties;
         }
-        
-
-        public void OnPhotonSerializeView(PhotonStream stream, PhotonMessageInfo info)
-        {
-            //if (stream.IsWriting)
-            //{
-            //    // We own this player: send the others our data
-            //    stream.SendNext(role);
-            //    stream.SendNext(PhotonNetwork.NickName);
-            //}
-            //else
-            //{
-            //    // Network player, receive data
-            //    Role otherRole = (Role)stream.ReceiveNext();
-            //    string otherNickname = (string)stream.ReceiveNext();
-
-            //    SelectRole(otherRole, otherNickname);
-            //}
-        }
+       
 
         public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
         {
