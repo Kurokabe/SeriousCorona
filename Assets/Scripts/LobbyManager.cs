@@ -12,7 +12,7 @@ using TMPro;
 using UnityEngine.UI;
 using ExitGames.Client.Photon;
 
-namespace Com.MyCompany.MyGame
+namespace SeriousCorona
 {
     public enum Role
     {
@@ -21,15 +21,17 @@ namespace Com.MyCompany.MyGame
         MANAGER
     }
 
-    public class LobbyManager : MonoBehaviourPunCallbacks
+    public class LobbyManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     {
 
         #region Private Serialize Fields
         [SerializeField]
-        private  Button buttonPlayer;
+        private Button buttonPlayer;
         [SerializeField]
         private Button buttonManager;
-        
+        [SerializeField]
+        private Button buttonPlay;
+
         [SerializeField]
         private TextMeshProUGUI textPlayer;
         [SerializeField]
@@ -55,6 +57,27 @@ namespace Com.MyCompany.MyGame
 
         #endregion
 
+        #region MonoBehaviour CallBacks
+        void Start()
+        {
+            if (PhotonNetwork.IsMasterClient)
+            {
+                buttonPlay.gameObject.SetActive(true);
+            }
+            else
+            {
+                buttonPlay.gameObject.SetActive(false);
+            }
+        }
+
+        void Update()
+        {
+            if (buttonPlay.gameObject.activeSelf)
+            {
+                buttonPlay.interactable = textPlayer.text != "" && textManager.text != "";
+            }
+        }
+        #endregion
 
         #region Public Methods
 
@@ -62,7 +85,12 @@ namespace Com.MyCompany.MyGame
         {
             PhotonNetwork.LeaveRoom();
         }
-        
+
+        public void StartGame()
+        {
+            PhotonNetwork.LoadLevel("GameScene");
+        }
+
         public void SelectPlayer()
         {
             SetRole(Role.PLAYER);
@@ -74,7 +102,33 @@ namespace Com.MyCompany.MyGame
             SetRole(Role.MANAGER);
             buttonPlayer.interactable = false;
         }
+        #endregion
 
+        #region MonoBehaviourPunCallbacks Callbacks
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            base.OnPlayerEnteredRoom(newPlayer);
+            SetRole(role);
+        }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+            base.OnPlayerLeftRoom(otherPlayer);
+
+            SelectRole(Role.NONE, otherPlayer.NickName);
+        }
+
+        public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+        {
+            base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
+            SelectRole((Role)changedProps[propRole], targetPlayer.NickName);
+        }
+
+
+
+        #endregion
+
+        #region Private Methods
         private void SetRole(Role role)
         {
             this.role = role;
@@ -84,19 +138,6 @@ namespace Com.MyCompany.MyGame
             PhotonNetwork.SetPlayerCustomProperties(playerProperties);
             //PhotonNetwork.LocalPlayer.CustomProperties = playerProperties;
         }
-       
-
-        public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
-        {
-            base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
-            SelectRole((Role)changedProps[propRole], targetPlayer.NickName);
-        }
-
-        //public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
-        //{
-        //    SelectRole((Role)changedProps[propRole], targetPlayer.NickName);
-        //}
-
         private void SelectRole(Role role, string nickname)
         {
             if (role == Role.PLAYER)
@@ -113,30 +154,26 @@ namespace Com.MyCompany.MyGame
             {
                 if (textManager.text == nickname)
                 {
-                    buttonManager.interactable = true;
+                    buttonManager.interactable = buttonPlayer.interactable;
                     textManager.text = "";
                 }
                 else if (textPlayer.text == nickname)
                 {
-                    buttonPlayer.interactable = true;
+                    buttonPlayer.interactable = buttonManager.interactable;
                     textPlayer.text = "";
                 }
             }
         }
+        #endregion
 
-        public override void OnPlayerEnteredRoom(Player newPlayer)
+        #region IInRoomCallbacks
+        void IInRoomCallbacks.OnMasterClientSwitched(Player newMasterClient)
         {
-            base.OnPlayerEnteredRoom(newPlayer);
-            SetRole(role);
+            if (newMasterClient.Equals(PhotonNetwork.LocalPlayer))
+            {
+                buttonPlay.gameObject.SetActive(true);
+            }
         }
-
-        public override void OnPlayerLeftRoom(Player otherPlayer)
-        {
-            base.OnPlayerLeftRoom(otherPlayer);
-
-            SelectRole(Role.NONE, otherPlayer.NickName);
-        }
-
         #endregion
     }
 }
