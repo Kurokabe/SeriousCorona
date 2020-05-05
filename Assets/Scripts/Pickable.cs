@@ -2,11 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickable : MonoBehaviour
+namespace SeriousCorona
 {
-    public void Pick()
+    public class Pickable : MonoBehaviour
     {
-        print($"You picked {name}");
-        Destroy(gameObject);
+        public void Pick()
+        {
+            print($"You picked {name}");
+            Destroy(gameObject);
+        }
     }
 }

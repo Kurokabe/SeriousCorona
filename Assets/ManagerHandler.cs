@@ -2,17 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ManagerHandler : MonoBehaviour
+
+namespace SeriousCorona
 {
-    // Start is called before the first frame update
-    void Start()
+    public class ManagerHandler : MonoBehaviour
     {
-        print("STart Manager");
-    }
+        // Start is called before the first frame update
+        void Start()
+        {
+            print("STart Manager");
+        }
 
-    // Update is called once per frame
-    void Update()
-    {
+        // Update is called once per frame
+        void Update()
+        {
 
+        }
     }
 }

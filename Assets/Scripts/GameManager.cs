@@ -4,83 +4,85 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 
-public class GameManager : MonoBehaviour
+namespace SeriousCorona
 {
-    // Start is called before the first frame update
-    public Role role;
-
-    [SerializeField]
-    private Camera handlerCamera;
-    [SerializeField]
-    private ManagerHandler managerHandler;
-
-    [SerializeField]
-    private PlayerHandler playerHandler;
-    [SerializeField]
-    private Camera playerCamera;
-    [SerializeField]
-    private GameObject playerObject;
-
-    public enum GameState
+    public class GameManager : MonoBehaviour
     {
-        PLANNING,
-        PLAYING
-    }
-    public GameState gameState;
+        // Start is called before the first frame update
+        public Role role;
 
-    void Start()
-    {
-        role = (Role) PhotonNetwork.LocalPlayer.CustomProperties["Role"];
-        if(role == Role.MANAGER)
+        public static GameManager instance;
+
+        [SerializeField]
+        private ManagerHandler managerHandler;
+
+        [SerializeField]
+        private PlayerHandler playerHandler;
+        [SerializeField]
+        private GameObject playerObject;
+
+        public enum GameState
         {
-            managerHandler = FindObjectOfType<ManagerHandler>();
+            PLANNING,
+            PLAYING
         }
-        else if(role == Role.PLAYER)
-        {
-            playerHandler = FindObjectOfType<PlayerHandler>();
-        }
-        gameState = GameState.PLANNING;
+        public GameState gameState;
 
-    }
-
-    private void HandleGamestate()
-    {
-        if(gameState == GameState.PLANNING)
+        void Start()
         {
-            if(role == Role.MANAGER)
+            instance = this;
+            role = (Role)PhotonNetwork.LocalPlayer.CustomProperties["Role"];
+            if (role == Role.MANAGER)
             {
-                managerHandler.gameObject.SetActive(true);
+                managerHandler = FindObjectOfType<ManagerHandler>();
             }
-            else
+            else if (role == Role.PLAYER)
             {
-                playerHandler.gameObject.SetActive(false);
-            }            
+                playerHandler = FindObjectOfType<PlayerHandler>();
+            }
+            gameState = GameState.PLANNING;
+
         }
-        else if(gameState == GameState.PLAYING)
+
+        private void HandleGamestate()
         {
-            if (role == Role.PLAYER)
+            if (gameState == GameState.PLANNING)
             {
-                playerHandler.gameObject.SetActive(true);
+                if (role == Role.MANAGER)
+                {
+                    managerHandler.gameObject.SetActive(true);
+                }
+                else
+                {
+                    playerHandler.gameObject.SetActive(false);
+                }
+            }
+            else if (gameState == GameState.PLAYING)
+            {
                 playerObject.SetActive(true);
+                if (role == Role.PLAYER)
+                {
+                    playerHandler.gameObject.SetActive(true);                    
+                }
+                else
+                {
+                    managerHandler.gameObject.SetActive(false);
+                }
             }
-            else
-            {
-                managerHandler.gameObject.SetActive(false);
-            }            
         }
-    }
 
-    public void FinishPlanning()
-    {
-        print("next phase");
-        gameState = GameState.PLAYING;
-        HandleGamestate();
-    }
+        public void FinishPlanning()
+        {
+            print("next phase");
+            gameState = GameState.PLAYING;
+            HandleGamestate();
+        }
 
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }

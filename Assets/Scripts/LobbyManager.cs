@@ -12,165 +12,168 @@ using TMPro;
 using UnityEngine.UI;
 using ExitGames.Client.Photon;
 
-public enum Role
+namespace SeriousCorona
 {
-    NONE,
-    PLAYER,
-    MANAGER
-}
-
-public class LobbyManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
-{
-
-    #region Private Serialize Fields
-    [SerializeField]
-    private  Button buttonPlayer;
-    [SerializeField]
-    private Button buttonManager;
-    [SerializeField]
-    private Button buttonPlay;
-
-    [SerializeField]
-    private TextMeshProUGUI textPlayer;
-    [SerializeField]
-    private TextMeshProUGUI textManager;
-    #endregion
-
-    #region Private Fields
-    private const string propRole = "Role";
-    private Role role;
-    #endregion
-
-    #region Photon Callbacks
-
-
-    /// <summary>
-    /// Called when the local player left the room. We need to load the launcher scene.
-    /// </summary>
-    public override void OnLeftRoom()
+    public enum Role
     {
-        SceneManager.LoadScene(0);
+        NONE,
+        PLAYER,
+        MANAGER
     }
 
-
-    #endregion
-
-    #region MonoBehaviour CallBacks
-    void Start()
+    public class LobbyManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
     {
-        if (PhotonNetwork.IsMasterClient)
+
+        #region Private Serialize Fields
+        [SerializeField]
+        private Button buttonPlayer;
+        [SerializeField]
+        private Button buttonManager;
+        [SerializeField]
+        private Button buttonPlay;
+
+        [SerializeField]
+        private TextMeshProUGUI textPlayer;
+        [SerializeField]
+        private TextMeshProUGUI textManager;
+        #endregion
+
+        #region Private Fields
+        private const string propRole = "Role";
+        private Role role;
+        #endregion
+
+        #region Photon Callbacks
+
+
+        /// <summary>
+        /// Called when the local player left the room. We need to load the launcher scene.
+        /// </summary>
+        public override void OnLeftRoom()
         {
-            buttonPlay.gameObject.SetActive(true);
+            SceneManager.LoadScene(0);
         }
-        else
+
+
+        #endregion
+
+        #region MonoBehaviour CallBacks
+        void Start()
         {
-            buttonPlay.gameObject.SetActive(false);
+            if (PhotonNetwork.IsMasterClient)
+            {
+                buttonPlay.gameObject.SetActive(true);
+            }
+            else
+            {
+                buttonPlay.gameObject.SetActive(false);
+            }
         }
-    }
 
-    void Update()
-    {
-        if (buttonPlay.gameObject.activeSelf)
+        void Update()
         {
-            buttonPlay.interactable = textPlayer.text != "" && textManager.text != "";
+            if (buttonPlay.gameObject.activeSelf)
+            {
+                buttonPlay.interactable = textPlayer.text != "" && textManager.text != "";
+            }
         }
-    }
-    #endregion
+        #endregion
 
-    #region Public Methods
+        #region Public Methods
 
-    public void LeaveRoom()
-    {
-        PhotonNetwork.LeaveRoom();
-    }
-
-    public void StartGame()
-    {
-        PhotonNetwork.LoadLevel("GameScene");
-    }
-        
-    public void SelectPlayer()
-    {
-        SetRole(Role.PLAYER);
-        buttonManager.interactable = false;
-    }
-
-    public void SelectManager()
-    {
-        SetRole(Role.MANAGER);
-        buttonPlayer.interactable = false;
-    }
-    #endregion
-
-    #region MonoBehaviourPunCallbacks Callbacks
-    public override void OnPlayerEnteredRoom(Player newPlayer)
-    {
-        base.OnPlayerEnteredRoom(newPlayer);
-        SetRole(role);
-    }
-
-    public override void OnPlayerLeftRoom(Player otherPlayer)
-    {
-        base.OnPlayerLeftRoom(otherPlayer);
-
-        SelectRole(Role.NONE, otherPlayer.NickName);
-    }
-
-    public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
-    {
-        base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
-        SelectRole((Role)changedProps[propRole], targetPlayer.NickName);
-    }
-
-        
-
-    #endregion
-
-    #region Private Methods
-    private void SetRole(Role role)
-    {
-        this.role = role;
-        ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
-        playerProperties.Add(propRole, role);
-
-        PhotonNetwork.SetPlayerCustomProperties(playerProperties);
-        //PhotonNetwork.LocalPlayer.CustomProperties = playerProperties;
-    }
-    private void SelectRole(Role role, string nickname)
-    {
-        if (role == Role.PLAYER)
+        public void LeaveRoom()
         {
-            buttonPlayer.interactable = false;
-            textPlayer.text = nickname;
+            PhotonNetwork.LeaveRoom();
         }
-        else if (role == Role.MANAGER)
+
+        public void StartGame()
         {
+            PhotonNetwork.LoadLevel("GameScene");
+        }
+
+        public void SelectPlayer()
+        {
+            SetRole(Role.PLAYER);
             buttonManager.interactable = false;
-            textManager.text = nickname;
         }
-        else
-        {
-            if (textManager.text == nickname)
-            {
-                buttonManager.interactable = buttonPlayer.interactable;
-                textManager.text = "";
-            }
-            else if (textPlayer.text == nickname)
-            {
-                buttonPlayer.interactable = buttonManager.interactable;
-                textPlayer.text = "";
-            }
-        }
-    }
-    #endregion
 
-    #region IInRoomCallbacks
-    void IInRoomCallbacks.OnMasterClientSwitched(Player newMasterClient)
-    {
-        if (newMasterClient.Equals(PhotonNetwork.LocalPlayer))
+        public void SelectManager()
         {
-            buttonPlay.gameObject.SetActive(true);
+            SetRole(Role.MANAGER);
+            buttonPlayer.interactable = false;
         }
+        #endregion
+
+        #region MonoBehaviourPunCallbacks Callbacks
+        public override void OnPlayerEnteredRoom(Player newPlayer)
+        {
+            base.OnPlayerEnteredRoom(newPlayer);
+            SetRole(role);
+        }
+
+        public override void OnPlayerLeftRoom(Player otherPlayer)
+        {
+            base.OnPlayerLeftRoom(otherPlayer);
+
+            SelectRole(Role.NONE, otherPlayer.NickName);
+        }
+
+        public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
+        {
+            base.OnPlayerPropertiesUpdate(targetPlayer, changedProps);
+            SelectRole((Role)changedProps[propRole], targetPlayer.NickName);
+        }
+
+
+
+        #endregion
+
+        #region Private Methods
+        private void SetRole(Role role)
+        {
+            this.role = role;
+            ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
+            playerProperties.Add(propRole, role);
+
+            PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+            //PhotonNetwork.LocalPlayer.CustomProperties = playerProperties;
+        }
+        private void SelectRole(Role role, string nickname)
+        {
+            if (role == Role.PLAYER)
+            {
+                buttonPlayer.interactable = false;
+                textPlayer.text = nickname;
+            }
+            else if (role == Role.MANAGER)
+            {
+                buttonManager.interactable = false;
+                textManager.text = nickname;
+            }
+            else
+            {
+                if (textManager.text == nickname)
+                {
+                    buttonManager.interactable = buttonPlayer.interactable;
+                    textManager.text = "";
+                }
+                else if (textPlayer.text == nickname)
+                {
+                    buttonPlayer.interactable = buttonManager.interactable;
+                    textPlayer.text = "";
+                }
+            }
+        }
+        #endregion
+
+        #region IInRoomCallbacks
+        void IInRoomCallbacks.OnMasterClientSwitched(Player newMasterClient)
+        {
+            if (newMasterClient.Equals(PhotonNetwork.LocalPlayer))
+            {
+                buttonPlay.gameObject.SetActive(true);
+            }
+        }
+        #endregion
     }
-    #endregion
 }
