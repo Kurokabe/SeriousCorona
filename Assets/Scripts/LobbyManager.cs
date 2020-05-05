@@ -12,7 +12,6 @@ using TMPro;
 using UnityEngine.UI;
 using ExitGames.Client.Photon;
 
-
 public enum Role
 {
     NONE,
@@ -20,22 +19,22 @@ public enum Role
     MANAGER
 }
 
-    public class LobbyManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
-    {
+public class LobbyManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
+{
 
-        #region Private Serialize Fields
-        [SerializeField]
-        private  Button buttonPlayer;
-        [SerializeField]
-        private Button buttonManager;
-        [SerializeField]
-        private Button buttonPlay;
+    #region Private Serialize Fields
+    [SerializeField]
+    private  Button buttonPlayer;
+    [SerializeField]
+    private Button buttonManager;
+    [SerializeField]
+    private Button buttonPlay;
 
-        [SerializeField]
-        private TextMeshProUGUI textPlayer;
-        [SerializeField]
-        private TextMeshProUGUI textManager;
-        #endregion
+    [SerializeField]
+    private TextMeshProUGUI textPlayer;
+    [SerializeField]
+    private TextMeshProUGUI textManager;
+    #endregion
 
     #region Private Fields
     private const string propRole = "Role";
@@ -56,39 +55,39 @@ public enum Role
 
     #endregion
 
-        #region MonoBehaviour CallBacks
-        void Start()
+    #region MonoBehaviour CallBacks
+    void Start()
+    {
+        if (PhotonNetwork.IsMasterClient)
         {
-            if (PhotonNetwork.IsMasterClient)
-            {
-                buttonPlay.gameObject.SetActive(true);
-            }
-            else
-            {
-                buttonPlay.gameObject.SetActive(false);
-            }
+            buttonPlay.gameObject.SetActive(true);
         }
-
-        void Update()
+        else
         {
-            if (buttonPlay.gameObject.activeSelf)
-            {
-                buttonPlay.interactable = textPlayer.text != "" && textManager.text != "";
-            }
+            buttonPlay.gameObject.SetActive(false);
         }
-        #endregion
+    }
 
-        #region Public Methods
-
-        public void LeaveRoom()
+    void Update()
+    {
+        if (buttonPlay.gameObject.activeSelf)
         {
-            PhotonNetwork.LeaveRoom();
+            buttonPlay.interactable = textPlayer.text != "" && textManager.text != "";
         }
+    }
+    #endregion
 
-        public void StartGame()
-        {
-            PhotonNetwork.LoadLevel("SampleScene");
-        }
+    #region Public Methods
+
+    public void LeaveRoom()
+    {
+        PhotonNetwork.LeaveRoom();
+    }
+
+    public void StartGame()
+    {
+        PhotonNetwork.LoadLevel("SampleScene");
+    }
         
     public void SelectPlayer()
     {
@@ -96,26 +95,26 @@ public enum Role
         buttonManager.interactable = false;
     }
 
-        public void SelectManager()
-        {
-            SetRole(Role.MANAGER);
-            buttonPlayer.interactable = false;
-        }
-        #endregion
+    public void SelectManager()
+    {
+        SetRole(Role.MANAGER);
+        buttonPlayer.interactable = false;
+    }
+    #endregion
 
-        #region MonoBehaviourPunCallbacks Callbacks
-        public override void OnPlayerEnteredRoom(Player newPlayer)
-        {
-            base.OnPlayerEnteredRoom(newPlayer);
-            SetRole(role);
-        }
+    #region MonoBehaviourPunCallbacks Callbacks
+    public override void OnPlayerEnteredRoom(Player newPlayer)
+    {
+        base.OnPlayerEnteredRoom(newPlayer);
+        SetRole(role);
+    }
 
-        public override void OnPlayerLeftRoom(Player otherPlayer)
-        {
-            base.OnPlayerLeftRoom(otherPlayer);
+    public override void OnPlayerLeftRoom(Player otherPlayer)
+    {
+        base.OnPlayerLeftRoom(otherPlayer);
 
-            SelectRole(Role.NONE, otherPlayer.NickName);
-        }
+        SelectRole(Role.NONE, otherPlayer.NickName);
+    }
 
     public override void OnPlayerPropertiesUpdate(Player targetPlayer, ExitGames.Client.Photon.Hashtable changedProps)
     {
@@ -125,19 +124,21 @@ public enum Role
 
         
 
-        #endregion
+    #endregion
 
-        #region Private Methods
-        private void SetRole(Role role)
-        {
-            this.role = role;
-            ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
-            playerProperties.Add(propRole, role);
+    #region Private Methods
+    private void SetRole(Role role)
+    {
+        this.role = role;
+        ExitGames.Client.Photon.Hashtable playerProperties = new ExitGames.Client.Photon.Hashtable();
+        playerProperties.Add(propRole, role);
 
-            PhotonNetwork.SetPlayerCustomProperties(playerProperties);
-            //PhotonNetwork.LocalPlayer.CustomProperties = playerProperties;
-        }
-        private void SelectRole(Role role, string nickname)
+        PhotonNetwork.SetPlayerCustomProperties(playerProperties);
+        //PhotonNetwork.LocalPlayer.CustomProperties = playerProperties;
+    }
+    private void SelectRole(Role role, string nickname)
+    {
+        if (role == Role.PLAYER)
         {
             buttonPlayer.interactable = false;
             textPlayer.text = nickname;
@@ -151,40 +152,25 @@ public enum Role
         {
             if (textManager.text == nickname)
             {
-                buttonManager.interactable = true;
+                buttonManager.interactable = buttonPlayer.interactable;
                 textManager.text = "";
             }
             else if (textPlayer.text == nickname)
             {
-                buttonPlayer.interactable = true;
+                buttonPlayer.interactable = buttonManager.interactable;
                 textPlayer.text = "";
             }
-            else
-            {
-                if (textManager.text == nickname)
-                {
-                    buttonManager.interactable = buttonPlayer.interactable;
-                    textManager.text = "";
-                }
-                else if (textPlayer.text == nickname)
-                {
-                    buttonPlayer.interactable = buttonManager.interactable;
-                    textPlayer.text = "";
-                }
-            }
         }
-        #endregion
-
-        #region IInRoomCallbacks
-        void IInRoomCallbacks.OnMasterClientSwitched(Player newMasterClient)
-        {
-            if (newMasterClient.Equals(PhotonNetwork.LocalPlayer))
-            {
-                buttonPlay.gameObject.SetActive(true);
-            }
-        }
-        #endregion
     }
+    #endregion
 
+    #region IInRoomCallbacks
+    void IInRoomCallbacks.OnMasterClientSwitched(Player newMasterClient)
+    {
+        if (newMasterClient.Equals(PhotonNetwork.LocalPlayer))
+        {
+            buttonPlay.gameObject.SetActive(true);
+        }
+    }
     #endregion
 }
