@@ -75,5 +75,18 @@ namespace SeriousCorona
             m_Character.Move(m_Move, crouch, m_Jump);
             m_Jump = false;
         }
+
+
+        private void OnTriggerStay(Collider other)
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                Pickable obj = other.gameObject.GetComponent<Pickable>();
+                if (obj != null)
+                {
+                    obj.Pick();
+                }
+            }
+        }
     }
 }

@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3760717000185755426}
   - component: {fileID: 8239476953030527815}
   - component: {fileID: 6387103729802665963}
+  - component: {fileID: -2492531072862493389}
   m_Layer: 0
   m_Name: Maskbox
   m_TagString: Untagged
@@ -75,6 +76,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a73a49230741f314aa656c2d498affa0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &-2492531072862493389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 191019147219830107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 0
+  OwnershipTransfer: 0
+  ObservedComponents: []
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1001 &4008670787754504509
 PrefabInstance:
   m_ObjectHideFlags: 0

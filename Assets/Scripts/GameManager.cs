@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
+using TMPro;
 
 namespace SeriousCorona
 {
@@ -18,19 +19,35 @@ namespace SeriousCorona
         private GameObject managerCamera;
         [SerializeField]
         private GameObject finishButton;
+        [SerializeField]
+        private TextMeshProUGUI remainingTimeText;
+        [SerializeField]
+        private TextMeshProUGUI maskNumberText;
+        [SerializeField]
+        private TextMeshProUGUI bottleNumberText;
 
         [SerializeField]
         private PlayerHandler playerHandler;
         [SerializeField]
-        private GameObject playerObject;
-        public GameObject spawnPlayer;
+        private GameObject playerPrefab;
+        [SerializeField]
+        private GameObject spawnPlayer;
 
-        private const string PREFAB_NAME = "ThirdPersonController";
+        public float PlayerTime = 180f;
+
+        private int maskNumber = 0;
+        private int bottleNumber = 0;
+
+        public int MaskNumber { get => maskNumber; set { maskNumber = value; maskNumberText.text = maskNumber.ToString(); } }
+        public int BottleNumber { get => bottleNumber; set { bottleNumber = value; bottleNumberText.text = bottleNumber.ToString(); } }
+
+        private PhotonView view;
 
         public enum GameState
         {
             PLANNING,
-            PLAYING
+            PLAYING,
+            END
         }
         private GameState gameState;
 
@@ -47,10 +64,14 @@ namespace SeriousCorona
             }
         }
 
+
         void Start()
         {
             instance = this;
-            if(PhotonNetwork.LocalPlayer.CustomProperties["Role"] != null)
+
+            view = GetComponent<PhotonView>();
+
+            if (PhotonNetwork.LocalPlayer.CustomProperties["Role"] != null)
                 role = (Role)PhotonNetwork.LocalPlayer.CustomProperties["Role"];
 
             if (role == Role.MANAGER)
@@ -81,13 +102,14 @@ namespace SeriousCorona
             }
             else if (GameStateP == GameState.PLAYING)
             {
+                StartCoroutine(PlayerTimer());
                 managerCamera.SetActive(false);
                 finishButton.SetActive(false);
                 //playerObject.SetActive(true);
                 if (role == Role.PLAYER)
                 {
                     print("init");
-                    PhotonNetwork.Instantiate(PREFAB_NAME, spawnPlayer.transform.position, spawnPlayer.transform.rotation);
+                    PhotonNetwork.Instantiate(playerPrefab.name, spawnPlayer.transform.position, spawnPlayer.transform.rotation);
                     //playerHandler.gameObject.SetActive(true);                    
                 }
                 else
@@ -95,6 +117,23 @@ namespace SeriousCorona
                     //managerHandler.gameObject.SetActive(false);
                 }
             }
+            else if (GameStateP == GameState.END)
+            {
+                print($"You've recolted {MaskNumber} Masks and {BottleNumber} bottles of disinfectant");
+            }
+        }
+
+        IEnumerator PlayerTimer()
+        {
+            float currentTime = PlayerTime;
+            while (currentTime > 0)
+            {
+                var tmpTime = Time.time;
+                yield return new WaitForSeconds(0.1f);
+                currentTime -= (Time.time - tmpTime);
+                remainingTimeText.text = ((int)currentTime).ToString();
+            }
+            GameStateP = GameState.END;
         }
 
         public void FinishPlanning()
@@ -118,6 +157,25 @@ namespace SeriousCorona
             {
                 print("State changed " + role); 
                 GameStateP = (GameState)stream.ReceiveNext();
+            }
+        }
+
+        public void Pickup(string item)
+        {
+            view.RPC("PickupItem", RpcTarget.All, item);
+        }
+
+        [PunRPC]
+        void PickupItem(string item)
+        {
+            if (item == "Bottle")
+            {
+                print("ITEM PICKED : " + item);
+                BottleNumber++;
+            }
+            else if (item == "Maskbox")
+            {
+                MaskNumber++;
             }
         }
     }
