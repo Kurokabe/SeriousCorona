@@ -86,7 +86,7 @@ public class LobbyManager : MonoBehaviourPunCallbacks, IInRoomCallbacks
 
     public void StartGame()
     {
-        PhotonNetwork.LoadLevel("SampleScene");
+        PhotonNetwork.LoadLevel("GameScene");
     }
         
     public void SelectPlayer()
