@@ -16,6 +16,7 @@ namespace SeriousCorona
         
         private void Start()
         {
+            print(GameManager.instance.role);
             if (GameManager.instance.role != Role.PLAYER)
                 this.enabled = false;
             // get the transform of the main camera

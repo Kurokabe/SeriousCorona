@@ -44,7 +44,9 @@ namespace SeriousCorona
         void Start()
         {
             instance = this;
-            role = (Role)PhotonNetwork.LocalPlayer.CustomProperties["Role"];
+            if(PhotonNetwork.LocalPlayer.CustomProperties["Role"] != null)
+                role = (Role)PhotonNetwork.LocalPlayer.CustomProperties["Role"];
+
             if (role == Role.MANAGER)
             {
                 managerHandler = FindObjectOfType<ManagerHandler>();
@@ -63,11 +65,12 @@ namespace SeriousCorona
             {
                 if (role == Role.MANAGER)
                 {
-                    managerHandler.gameObject.SetActive(true);
+                    //managerHandler.gameObject.SetActive(true);
                 }
                 else
                 {
-                    playerHandler.gameObject.SetActive(false);
+                    finishButton.SetActive(false);
+                    //playerHandler.gameObject.SetActive(false);
                 }
             }
             else if (GameStateP == GameState.PLAYING)
@@ -77,11 +80,11 @@ namespace SeriousCorona
                 playerObject.SetActive(true);
                 if (role == Role.PLAYER)
                 {
-                    playerHandler.gameObject.SetActive(true);                    
+                    //playerHandler.gameObject.SetActive(true);                    
                 }
                 else
                 {
-                    managerHandler.gameObject.SetActive(false);
+                    //managerHandler.gameObject.SetActive(false);
                 }
             }
         }

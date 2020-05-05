@@ -41,7 +41,6 @@ namespace SeriousCorona
                 //float newY = Mathf.Clamp(transform.position.y + zoomTo, 8f, 50f);
 
                 Vector3 move = new Vector3(H, V, zoomTo);
-                print(move);
                 transform.Translate(move);
             }
         }
