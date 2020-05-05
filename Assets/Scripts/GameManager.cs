@@ -7,14 +7,19 @@ using Photon.Realtime;
 public class GameManager : MonoBehaviour
 {
     // Start is called before the first frame update
-    private Role role;
+    public Role role;
 
-
+    [SerializeField]
     private Camera handlerCamera;
+    [SerializeField]
     private ManagerHandler managerHandler;
 
+    [SerializeField]
     private PlayerHandler playerHandler;
+    [SerializeField]
     private Camera playerCamera;
+    [SerializeField]
+    private GameObject playerObject;
 
     public enum GameState
     {
@@ -56,12 +61,20 @@ public class GameManager : MonoBehaviour
             if (role == Role.PLAYER)
             {
                 playerHandler.gameObject.SetActive(true);
+                playerObject.SetActive(true);
             }
             else
             {
                 managerHandler.gameObject.SetActive(false);
             }            
         }
+    }
+
+    public void FinishPlanning()
+    {
+        print("next phase");
+        gameState = GameState.PLAYING;
+        HandleGamestate();
     }
 
 
