@@ -23,6 +23,9 @@ namespace SeriousCorona
         private PlayerHandler playerHandler;
         [SerializeField]
         private GameObject playerObject;
+        public GameObject spawnPlayer;
+
+        private const string PREFAB_NAME = "ThirdPersonController";
 
         public enum GameState
         {
@@ -77,9 +80,10 @@ namespace SeriousCorona
             {
                 managerCamera.SetActive(false);
                 finishButton.SetActive(false);
-                playerObject.SetActive(true);
+                //playerObject.SetActive(true);
                 if (role == Role.PLAYER)
                 {
+                    PhotonNetwork.Instantiate(PREFAB_NAME, spawnPlayer.transform.position, spawnPlayer.transform.rotation);
                     //playerHandler.gameObject.SetActive(true);                    
                 }
                 else
