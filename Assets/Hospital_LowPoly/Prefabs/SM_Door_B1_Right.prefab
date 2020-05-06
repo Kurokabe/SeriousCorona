@@ -13,12 +13,14 @@ GameObject:
   - component: {fileID: 23568760035526280}
   - component: {fileID: 95086966287938084}
   - component: {fileID: 65402738419258094}
+  - component: {fileID: 128850955}
+  - component: {fileID: 128850954}
   m_Layer: 0
   m_Name: SM_Door_B1_Right
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4081194738787856
 Transform:
@@ -27,7 +29,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328217585139706}
-  m_LocalRotation: {x: 0.000000010927858, y: -0.86602515, z: -0.000000018927583, w: 0.50000054}
+  m_LocalRotation: {x: 0, y: -0.86602545, z: 0, w: 0.49999994}
   m_LocalPosition: {x: -20.824, y: -0.03, z: -0.082}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -89,7 +91,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1328217585139706}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 9000000, guid: 0491115bdcd5f4e4cad3dbdd26f81c79, type: 3}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
@@ -111,5 +113,56 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.10044422, y: 1.9852421, z: 0.8805762}
-  m_Center: {x: -0.023474129, y: 1.0117224, z: -0.45631006}
+  m_Size: {x: 0.10044422, y: 1.9852421, z: 0.8453214}
+  m_Center: {x: -0.02347413, y: 1.0117224, z: -0.43868268}
+--- !u!54 &128850955
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328217585139706}
+  serializedVersion: 2
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
+--- !u!59 &128850954
+HingeJoint:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1328217585139706}
+  m_ConnectedBody: {fileID: 0}
+  m_Anchor: {x: 0, y: 0, z: 0}
+  m_Axis: {x: 0, y: 1, z: 0}
+  m_AutoConfigureConnectedAnchor: 1
+  m_ConnectedAnchor: {x: 11.95, y: 0, z: 8.294999}
+  m_UseSpring: 1
+  m_Spring:
+    spring: 0.1
+    damper: 0
+    targetPosition: 0
+  m_UseMotor: 0
+  m_Motor:
+    targetVelocity: 0
+    force: 0
+    freeSpin: 0
+  m_UseLimits: 0
+  m_Limits:
+    min: 0
+    max: 0
+    bounciness: 0
+    bounceMinVelocity: 0.2
+    contactDistance: 0
+  m_BreakForce: Infinity
+  m_BreakTorque: Infinity
+  m_EnableCollision: 1
+  m_EnablePreprocessing: 1
+  m_MassScale: 1
+  m_ConnectedMassScale: 1

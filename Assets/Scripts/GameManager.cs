@@ -18,6 +18,8 @@ namespace SeriousCorona
         [SerializeField]
         private GameObject managerCamera;
         [SerializeField]
+        private GameObject managerCameraPrefab;
+        [SerializeField]
         private GameObject finishButton;
         [SerializeField]
         private TextMeshProUGUI remainingTimeText;
@@ -73,16 +75,20 @@ namespace SeriousCorona
 
             if (PhotonNetwork.LocalPlayer.CustomProperties["Role"] != null)
                 role = (Role)PhotonNetwork.LocalPlayer.CustomProperties["Role"];
-
+            StartCoroutine(PlayerTimer());
             if (role == Role.MANAGER)
             {
                 managerHandler = FindObjectOfType<ManagerHandler>();
+                GameObject.Instantiate(managerCameraPrefab, new Vector3(0,10,0), managerCameraPrefab.transform.rotation);
             }
             else if (role == Role.PLAYER)
             {
+                if (PhotonNetwork.LocalPlayer.CustomProperties["Role"] == null)
+                    GameObject.Instantiate(playerPrefab, spawnPlayer.transform.position, spawnPlayer.transform.rotation);
                 playerHandler = FindObjectOfType<PlayerHandler>();
+                PhotonNetwork.Instantiate(playerPrefab.name, spawnPlayer.transform.position, spawnPlayer.transform.rotation);
             }
-            GameStateP = GameState.PLANNING;
+            //GameStateP = GameState.PLANNING;
 
         }
 
@@ -114,6 +120,7 @@ namespace SeriousCorona
                 }
                 else
                 {
+                    PhotonNetwork.Instantiate(managerCameraPrefab.name, spawnPlayer.transform.position, spawnPlayer.transform.rotation);
                     //managerHandler.gameObject.SetActive(false);
                 }
             }

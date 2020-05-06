@@ -12,13 +12,19 @@ namespace SeriousCorona
         private Vector3 m_CamForward;             // The current forward direction of the camera
         private Vector3 m_Move;
         private bool m_Jump;                      // the world-relative desired move direction, calculated from the camForward and user input.
-       
+
+        [SerializeField]
+        private GameObject cam;
         
         private void Start()
         {
             print(GameManager.instance.role);
             if (GameManager.instance.role != Role.PLAYER)
+            {
                 this.enabled = false;
+                cam.SetActive(false);
+            }
+
             // get the transform of the main camera
             if (Camera.main != null)
             {
