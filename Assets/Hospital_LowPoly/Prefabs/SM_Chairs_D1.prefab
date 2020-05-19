@@ -13,12 +13,13 @@ GameObject:
   - component: {fileID: 23193556118355098}
   - component: {fileID: 95933023028600538}
   - component: {fileID: 65163991234394558}
+  - component: {fileID: 1228031749}
   m_Layer: 0
   m_Name: SM_Chairs_D1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4205505228095710
 Transform:
@@ -27,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1360366793152926}
-  m_LocalRotation: {x: 0.00000000847953, y: -0.02169711, z: -0.000000020143709, w: 0.9997646}
+  m_LocalRotation: {x: 0, y: -0.02169274, z: 0, w: 0.9997647}
   m_LocalPosition: {x: -10.145, y: 0.0020398672, z: 7.152}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -113,3 +114,19 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3698633, y: 1.2609546, z: 0.9107361}
   m_Center: {x: 0.053569317, y: 0.6267699, z: -0.0045294166}
+--- !u!54 &1228031749
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1360366793152926}
+  serializedVersion: 2
+  m_Mass: 40
+  m_Drag: 100
+  m_AngularDrag: 300
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0
