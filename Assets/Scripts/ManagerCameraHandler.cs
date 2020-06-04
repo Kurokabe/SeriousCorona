@@ -29,13 +29,11 @@ namespace SeriousCorona
                 if (y > 0.1f)
                 {
                     zoomTo = 1f * scaleZoom;
-                    Debug.Log("Zoomed In");
                 }
 
                 else if (y <= -0.1f)
                 {
                     zoomTo = -1f * scaleZoom;
-                    Debug.Log("Zoomed Out");
                 }
 
                 //float newY = Mathf.Clamp(transform.position.y + zoomTo, 8f, 50f);

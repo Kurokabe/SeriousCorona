@@ -13,12 +13,15 @@ GameObject:
   - component: {fileID: 23225711409440296}
   - component: {fileID: 95071356956545060}
   - component: {fileID: 65784004555034152}
+  - component: {fileID: 2713339949892314064}
+  - component: {fileID: 9047308686807900517}
+  - component: {fileID: 1440182733}
   m_Layer: 0
   m_Name: SM_Chairs_D2
-  m_TagString: Untagged
+  m_TagString: MoveableObj
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
 --- !u!4 &4650752974018868
 Transform:
@@ -27,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1526753820299628}
-  m_LocalRotation: {x: 0.000000002840017, y: 0.99152136, z: 0.000000021670388, w: 0.12994404}
+  m_LocalRotation: {x: 0, y: 0.991521, z: 0, w: 0.12994653}
   m_LocalPosition: {x: -34.914318, y: 0.007982079, z: -6.8833504}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -113,3 +116,56 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3698636, y: 1.2609546, z: 0.9107363}
   m_Center: {x: 0.053569328, y: 0.6267699, z: -0.0045294175}
+--- !u!114 &2713339949892314064
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526753820299628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 1
+  ObservedComponents:
+  - {fileID: 9047308686807900517}
+  viewIdField: 0
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
+--- !u!114 &9047308686807900517
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526753820299628}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 627855c7f81362d41938ffe0b1475957, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_SynchronizePosition: 1
+  m_SynchronizeRotation: 1
+  m_SynchronizeScale: 0
+--- !u!54 &1440182733
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1526753820299628}
+  serializedVersion: 2
+  m_Mass: 40
+  m_Drag: 100
+  m_AngularDrag: 300
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 84
+  m_CollisionDetection: 0

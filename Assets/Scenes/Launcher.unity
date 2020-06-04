@@ -1601,6 +1601,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6192169815569697883, guid: 079f0fd23d98549469acb448bb1479d1,
+        type: 3}
+      propertyPath: viewIdField
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 079f0fd23d98549469acb448bb1479d1, type: 3}
 --- !u!1 &1816104966
@@ -1843,7 +1848,7 @@ MonoBehaviour:
   m_outlineColor:
     serializedVersion: 2
     rgba: 4278190080
-  m_fontSize: 121.5
+  m_fontSize: 191.65
   m_fontSizeBase: 100
   m_fontWeight: 400
   m_enableAutoSizing: 1

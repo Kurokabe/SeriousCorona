@@ -56,8 +56,8 @@ namespace SeriousCorona
         private void FixedUpdate()
         {
             // read inputs
-            float h = CrossPlatformInputManager.GetAxis("Horizontal");
-            float v = CrossPlatformInputManager.GetAxis("Vertical");
+            float h = CrossPlatformInputManager.GetAxis("Horizontal") + CrossPlatformInputManager.GetAxis("HorizontalArrow");
+            float v = CrossPlatformInputManager.GetAxis("Vertical") + CrossPlatformInputManager.GetAxis("VerticalArrow");
             bool crouch = Input.GetKey(KeyCode.C);
 
             // calculate move direction to pass to character

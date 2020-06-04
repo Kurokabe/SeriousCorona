@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3392504569437271794}
   - component: {fileID: 3392504569437271792}
   - component: {fileID: 3392504569437271793}
+  - component: {fileID: -3502865184449310385}
   m_Layer: 0
   m_Name: ManagerCamera
   m_TagString: MainCamera
@@ -137,3 +138,16 @@ MonoBehaviour:
   m_SynchronizePosition: 1
   m_SynchronizeRotation: 1
   m_SynchronizeScale: 0
+--- !u!114 &-3502865184449310385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3392504569437271798}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 947ea4a1ee9e1374da1003889af31fa3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  scale: 0.05
