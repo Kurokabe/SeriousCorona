@@ -57,7 +57,6 @@ public class MoveObjects : MonoBehaviour
             }
             else
             {
-                print(selectedObjectPV.Owner);
                 if(selectedObjectPV.Owner != null && selectedObjectPV.Owner.UserId != Photon.Pun.PhotonNetwork.LocalPlayer.UserId)
                 {
                     selectedObject.GetComponent<Photon.Pun.PhotonView>().RequestOwnership();
