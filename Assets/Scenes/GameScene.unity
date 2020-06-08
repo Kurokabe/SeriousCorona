@@ -5345,6 +5345,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2003279719}
     m_Modifications:
+    - target: {fileID: -4502081267560587467, guid: ef37f5c1255d935439ee315b8118b67b,
+        type: 3}
+      propertyPath: viewIdField
+      value: 30
+      objectReference: {fileID: 0}
     - target: {fileID: 1062896950550608, guid: ef37f5c1255d935439ee315b8118b67b, type: 3}
       propertyPath: m_Name
       value: SM_Folding_Screen_A3
@@ -9260,6 +9265,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4831342107008921216, guid: 84f1577d68041494eb864b983c14fae9,
+        type: 3}
+      propertyPath: viewIdField
+      value: 27
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 84f1577d68041494eb864b983c14fae9, type: 3}
 --- !u!1 &705507993
@@ -9573,6 +9583,11 @@ PrefabInstance:
     - target: {fileID: 4650752974018868, guid: 0409e07f6aec724489e9490e24f20e89, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2713339949892314064, guid: 0409e07f6aec724489e9490e24f20e89,
+        type: 3}
+      propertyPath: viewIdField
+      value: 24
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0409e07f6aec724489e9490e24f20e89, type: 3}
@@ -11525,6 +11540,11 @@ PrefabInstance:
     - target: {fileID: 4249301894765286, guid: 079f0fd23d98549469acb448bb1479d1, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6192169815569697883, guid: 079f0fd23d98549469acb448bb1479d1,
+        type: 3}
+      propertyPath: viewIdField
+      value: 18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 079f0fd23d98549469acb448bb1479d1, type: 3}
@@ -19045,6 +19065,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2003279719}
     m_Modifications:
+    - target: {fileID: -3867903793081187369, guid: e63d6bae7d7725541b91bfd8965119f3,
+        type: 3}
+      propertyPath: viewIdField
+      value: 17
+      objectReference: {fileID: 0}
     - target: {fileID: 1360366793152926, guid: e63d6bae7d7725541b91bfd8965119f3, type: 3}
       propertyPath: m_Name
       value: SM_Chairs_D1 (1)
@@ -19322,6 +19347,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1653466173}
     m_Modifications:
+    - target: {fileID: -2286439995850373790, guid: d596b73d55436644bb18996be9711e55,
+        type: 3}
+      propertyPath: viewIdField
+      value: 13
+      objectReference: {fileID: 0}
     - target: {fileID: 1687684092988082, guid: d596b73d55436644bb18996be9711e55, type: 3}
       propertyPath: m_Name
       value: SM_Chairs_C2 (2)
@@ -19916,6 +19946,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2003279719}
     m_Modifications:
+    - target: {fileID: -4632042213634366863, guid: 27183e389a701e04692f834fc68143cd,
+        type: 3}
+      propertyPath: viewIdField
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 1727016594703772, guid: 27183e389a701e04692f834fc68143cd, type: 3}
       propertyPath: m_Name
       value: SM_Folding_Screen_A1 (2)
@@ -24418,6 +24453,11 @@ PrefabInstance:
     - target: {fileID: 4865285193572032, guid: 42b556ed288ff774cbfb74f1febfd5af, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4852066838185903361, guid: 42b556ed288ff774cbfb74f1febfd5af,
+        type: 3}
+      propertyPath: viewIdField
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 42b556ed288ff774cbfb74f1febfd5af, type: 3}

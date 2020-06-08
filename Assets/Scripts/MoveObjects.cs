@@ -5,6 +5,8 @@ using UnityEngine;
 public class MoveObjects : MonoBehaviour
 {
     private GameObject selectedObject;
+    private GameObject hoverObject;
+    private Outline hoverObjectOutline;
     private Rigidbody selectedObjectRb;
     private Outline selectedObjectOutline;
     private Photon.Pun.PhotonView selectedObjectPV;
@@ -15,7 +17,31 @@ public class MoveObjects : MonoBehaviour
 
     void Update()
     {
-       
+        if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, RAYCAST_DIST))
+        {
+            if (hit.collider.gameObject != null && hit.collider.gameObject.CompareTag("MoveableObj") && hit.collider.gameObject != selectedObject)
+            {
+                if (hit.collider.gameObject != hoverObject)
+                {
+                    RemoveOutlineHover();
+                    hoverObject = hit.collider.gameObject;
+                    if (!hoverObject.TryGetComponent(out Outline outline))
+                    {
+                        hoverObjectOutline = hoverObject.AddComponent<Outline>();
+                        hoverObjectOutline.OutlineColor = Color.blue;
+                    }
+                }            
+            }
+            else
+            {
+                RemoveOutlineHover();
+            }
+        }
+        else
+        {
+            RemoveOutlineHover();
+        }
+
         if (Input.GetMouseButtonDown(0))
         {
             selectOnClick();            
@@ -47,6 +73,16 @@ public class MoveObjects : MonoBehaviour
 
         
     }
+
+    private void RemoveOutlineHover()
+    {
+        if ((selectedObject != null && hoverObject != selectedObject) || selectedObject == null)
+        {
+            hoverObject = null;
+            DestroyImmediate(hoverObjectOutline);
+        }
+    }
+
     private void selectOnClick()
     {
         Destroy(selectedObjectOutline);
@@ -54,14 +90,18 @@ public class MoveObjects : MonoBehaviour
 
         if (Physics.Raycast(Camera.main.ScreenPointToRay(Input.mousePosition), out RaycastHit hit, RAYCAST_DIST))
         {
-
             if (hit.collider.gameObject != null && hit.collider.gameObject.CompareTag("MoveableObj"))
             {
                 selectedObject = hit.collider.gameObject;
+
+                if(selectedObject == hoverObject)
+                    selectedObjectOutline = selectedObject.GetComponent<Outline>();
+                else
+                    selectedObjectOutline = selectedObject.AddComponent<Outline>();
+
                 selectedObjectPV = selectedObject.GetComponent<Photon.Pun.PhotonView>();
                 selectedObjectPV.RequestOwnership();
-                selectedObjectRb = selectedObject.GetComponent<Rigidbody>();
-                selectedObjectOutline = selectedObject.AddComponent<Outline>();
+                selectedObjectRb = selectedObject.GetComponent<Rigidbody>();                
                 selectedObjectOutline.OutlineColor = Color.yellow;
             }
         }
