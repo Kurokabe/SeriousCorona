@@ -12,18 +12,20 @@ namespace SeriousCorona
         private TextMeshProUGUI infectionRateText;
 
         private int infectionRate = 0;
-        public int InfectionRate { get => infectionRate; set { infectionRate = value; infectionRateText.text = infectionRate.ToString() + " %"; } }
+        public int InfectionRate { get => infectionRate; set { infectionRate = Mathf.Clamp(value, 0, 100); infectionRateText.text = infectionRate.ToString() + " %"; } }
 
         private double delta = 0.5;
+        private bool hasExitEndZone = false;
 
         void Start()
         {
             infectionRateText = GameObject.Find("InfectionRateLabel").GetComponent<TextMeshProUGUI>();
+            InfectionRate = 30;
         }
 
         void OnTriggerEnter(Collider col)
         {
-            if (col.gameObject.CompareTag("EndZone"))
+            if (col.gameObject.CompareTag("EndZone") && hasExitEndZone)
             {
                 GameManager.instance.EndGame();
             }
@@ -43,9 +45,10 @@ namespace SeriousCorona
             }
         }
 
-        void OnTriggerLeave(Collider col)
+        void OnTriggerExit(Collider col)
         {
             delta = 0;
+            hasExitEndZone = true;
         }
     }
 }

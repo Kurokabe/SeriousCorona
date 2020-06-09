@@ -190,15 +190,16 @@ namespace SeriousCorona
 
         public void EndGame()
         {
-            float score = (Mathf.Max(infectionManger.InfectionRate - (maskNumber + bottleNumber), 0));
+            float infectLevel = 100 - (Mathf.Max(infectionManger.InfectionRate - (maskNumber + bottleNumber), 0));
+            int score = maskNumber + bottleNumber;
             float r = Random.value * 100;
-            if(r <= score)
+            if(r <= infectLevel)
             {
-                print("You win");
+                print("You win with a score of " + score);
             }
             else
             {
-                print("Vou were too careless, you get Corrona");
+                print("You got Coroned, you dumbass");
             }
         }
     }

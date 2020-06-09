@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 95009251798860114}
   - component: {fileID: 65618272820241058}
   - component: {fileID: 65638025276762840}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: SM_DoorFrame_400
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -28,7 +28,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1186399588571282}
-  m_LocalRotation: {x: 0.000000021855694, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 25.28376, y: 13.387077, z: -19.370378}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -62,8 +62,8 @@ MeshRenderer:
   m_RendererPriority: 0
   m_Materials:
   - {fileID: 2100000, guid: e84b9596d31668248829c0e7724d2fb1, type: 2}
-  - {fileID: 2100000, guid: 4341ba99b08573f49bcb9d16f6f35c8d, type: 2}
-  - {fileID: 2100000, guid: 87493e8cd6e1e3745ad82f937f9d0970, type: 2}
+  - {fileID: 2100000, guid: 91b7cb53b0ae7054fafcca63f92cf5a4, type: 2}
+  - {fileID: 2100000, guid: 2a41d168f5ad55d449417c0f351b0ee4, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,8 +114,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2753119, y: 3.3450146, z: 1.395961}
-  m_Center: {x: -0.10318756, y: 1.6694345, z: -0.6928006}
+  m_Size: {x: 0.2753119, y: 3.3450146, z: 1.3207241}
+  m_Center: {x: -0.10318756, y: 1.6694345, z: -0.6551821}
 --- !u!65 &65638025276762840
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -127,5 +127,5 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.2753119, y: 3.3450146, z: 1.4985554}
-  m_Center: {x: -0.10318756, y: 1.6694344, z: -3.2507648}
+  m_Size: {x: 0.2753119, y: 3.3450146, z: 1.4234778}
+  m_Center: {x: -0.10318756, y: 1.6694345, z: -3.2883039}
