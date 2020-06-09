@@ -1,14 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class InfectionManger : MonoBehaviour
 {
     
+    private TextMeshProUGUI infectionRateText;
+
     private int infectionRate = 0;
     public int InfectionRate { get => infectionRate; set { infectionRate = value; infectionRateText.text = infectionRate.ToString() + "%"; } }
     
-    private float delta = 0.5; 
+    private double delta = 0.5; 
+
+    void Start(){
+       infectionRateText = GameObject.Find("InfectionRateLabel").GetComponent<TextMeshProUGUI>();
+	}
 
     void OnTriggerStay(Collider col){
         if(col.tag == "enemy"){
@@ -22,6 +29,6 @@ public class InfectionManger : MonoBehaviour
 	}
 
     void OnTriggerLeave(Collider col){
-        delta = 0f;
+        delta = 0;
 	}
 }
