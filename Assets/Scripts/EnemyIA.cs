@@ -8,6 +8,7 @@ namespace SeriousCorona
     public class EnemyIA : MonoBehaviour
     {
         private NavMeshAgent agent;
+        private Animator animator;
         public Transform pos;
 
         public Transform playerT;
@@ -19,6 +20,7 @@ namespace SeriousCorona
         void Start()
         {
             agent = GetComponent<NavMeshAgent>();
+            animator = GetComponentInChildren<Animator>(); 
             //agent.destination = pos.position;
             playerT = FindObjectOfType<ThirdPersonCharacter>().transform;
             layerMask = LayerMask.GetMask("Default");
@@ -43,6 +45,15 @@ namespace SeriousCorona
             }
             else
                 i++;
+
+
+            Vector3 move = transform.InverseTransformDirection(agent.velocity);
+            move = Vector3.ProjectOnPlane(move, Vector3.up);
+            float m_TurnAmount = Mathf.Atan2(move.x, move.z);
+            float m_ForwardAmount = move.z;
+
+            animator.SetFloat("Forward", m_ForwardAmount, 0.1f, Time.deltaTime);
+            animator.SetFloat("Turn", m_TurnAmount, 0.1f, Time.deltaTime);
         }
     }
 }
