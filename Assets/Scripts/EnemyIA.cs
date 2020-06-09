@@ -74,8 +74,6 @@ namespace SeriousCorona
             if (!agent.pathPending && agent.remainingDistance < 1f && !playerVisible)
                 GotoNextPoint();
 
-            print(agent.remainingDistance);
-
             Vector3 move = transform.InverseTransformDirection(agent.velocity);
             move = Vector3.ProjectOnPlane(move, Vector3.up);
             float m_TurnAmount = Mathf.Atan2(move.x, move.z);
