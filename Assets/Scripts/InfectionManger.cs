@@ -20,7 +20,7 @@ namespace SeriousCorona
         void Start()
         {
             infectionRateText = GameObject.Find("InfectionRateLabel").GetComponent<TextMeshProUGUI>();
-            InfectionRate = 30;
+            InfectionRate = 20;
         }
 
         void OnTriggerEnter(Collider col)
@@ -37,7 +37,7 @@ namespace SeriousCorona
             {
                 delta += Time.deltaTime;
 
-                if (delta >= 1)
+                if (delta >= 0.5f)
                 {
                     InfectionRate++;
                     delta = 0;
