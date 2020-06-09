@@ -43,11 +43,13 @@ namespace SeriousCorona
                 if (Vector3.Distance(transform.position, playerT.position) < aggroDist)
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(transform.position, playerT.position - transform.position, out hit, aggroDist, layerMask)
-                        && hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
+                    if (Physics.Raycast(transform.position, playerT.position - transform.position, out hit, aggroDist))
                     {
-                        //print(hit.collider.gameObject.name);
-                        agent.destination = playerT.position;
+                        if (hit.collider.gameObject.CompareTag("Player"))
+                        {
+                            print(hit.collider.gameObject.name);
+                            agent.destination = playerT.position;
+                        }
                     }
                 }
             }
