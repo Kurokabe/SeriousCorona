@@ -40,7 +40,7 @@ namespace SeriousCorona
 
                 transform.position = new Vector3(
                                         Mathf.Clamp(oldP.x + H, 2f, 23f),
-                                        Mathf.Clamp(oldP.y - zoomTo, 4f, 12f),
+                                        Mathf.Clamp(oldP.y - zoomTo, 4f, 25f),
                                         Mathf.Clamp(oldP.z + V, -24f, 28f)
                                         );
             }

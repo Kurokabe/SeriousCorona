@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Photon.Pun;
 
 public class SpawnMaskAndBottle : MonoBehaviour
 {
@@ -9,7 +10,7 @@ public class SpawnMaskAndBottle : MonoBehaviour
 
     public GameObject prefabMask;
     public GameObject prefabBottle;
-
+    
 
     // Start is called before the first frame update
     void Start()
@@ -19,7 +20,7 @@ public class SpawnMaskAndBottle : MonoBehaviour
             float r = Random.value;
             if(r < proba)
             {
-                Instantiate((r < proba / 2 ? prefabMask : prefabBottle), t.position, t.rotation);
+               PhotonNetwork.Instantiate((r < proba / 2 ? prefabMask.name : prefabBottle.name), t.position, t.rotation);
             }
         }
     }

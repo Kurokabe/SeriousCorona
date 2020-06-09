@@ -5,6 +5,7 @@ using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace SeriousCorona
 {
@@ -41,6 +42,7 @@ namespace SeriousCorona
 
         private int maskNumber = 0;
         private int bottleNumber = 0;
+        private int infectionRate = 0;
 
         [SerializeField]
         private TextMeshProUGUI endLabel;
@@ -55,6 +57,7 @@ namespace SeriousCorona
 
         public int MaskNumber { get => maskNumber; set { maskNumber = value; maskNumberText.text = maskNumber.ToString(); } }
         public int BottleNumber { get => bottleNumber; set { bottleNumber = value; bottleNumberText.text = bottleNumber.ToString(); } }
+        public int InfectionRate { get => infectionRate; set => infectionRate = value; }
 
         private PhotonView view;
 
@@ -206,15 +209,13 @@ namespace SeriousCorona
         {
             playerCanvas.SetActive(false);
             endCanvas.SetActive(true);
-            float infectLevel = 100 - (Mathf.Max(infectionManger.InfectionRate - (maskNumber + bottleNumber), 0));
+            float infectLevel = 100 - (Mathf.Max(InfectionRate - (maskNumber + bottleNumber), 0));
             int score = maskNumber + bottleNumber;
             float r = Random.value * 100;
             if(r <= infectLevel && !hasBeenCatch && !noMoreTime)
             {
                 background.color = Color.green;
-                endLabel.text = "You win with";
-                print("You win with a score of " + score);
-                
+                endLabel.text = "You win with";                
             }
             else if(noMoreTime)
             {
@@ -224,13 +225,12 @@ namespace SeriousCorona
             else if (hasBeenCatch)
             {
                 background.color = Color.red;
-                endLabel.text = "A Doctor catch you and kick you butt out of the hospital";
+                endLabel.text = "A Doctor caught you and kicked your butt out of the hospital";
             }
             else
             {
                 background.color = Color.red;
-                endLabel.text = "You got Coroned, you dumbass";
-                print("You got Coroned, you dumbass");
+                endLabel.text = "You got Coroned, dumbass";
             }
             scoreLabel.text = score.ToString();
             Time.timeScale = 0;
@@ -241,7 +241,16 @@ namespace SeriousCorona
         }
         public void GoToLauncher()
         {
-            PhotonNetwork.LoadLevel("Launcher");
+            StartCoroutine(DisconnectAndLoad());
+        }
+        IEnumerator DisconnectAndLoad()
+        {
+            PhotonNetwork.LeaveRoom();
+            while(PhotonNetwork.InRoom)
+            {
+                yield return null;
+            }
+            SceneManager.LoadScene("Launcher", LoadSceneMode.Single);
         }
     }
 }

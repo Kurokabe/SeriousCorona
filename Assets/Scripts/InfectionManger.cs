@@ -12,7 +12,11 @@ namespace SeriousCorona
         private TextMeshProUGUI infectionRateText;
 
         private int infectionRate = 0;
-        public int InfectionRate { get => infectionRate; set { infectionRate = Mathf.Clamp(value, 0, 100); infectionRateText.text = infectionRate.ToString() + " %"; } }
+        public int InfectionRate { get => infectionRate; set { 
+                infectionRate = Mathf.Clamp(value, 0, 100); 
+                infectionRateText.text = infectionRate.ToString() + " %";
+                GameManager.instance.InfectionRate = infectionRate;
+            } }
 
         private double delta = 0.5;
         private bool hasExitEndZone = false;
