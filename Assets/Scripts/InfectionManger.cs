@@ -50,5 +50,13 @@ namespace SeriousCorona
             delta = 0;
             hasExitEndZone = true;
         }
+
+        void OnCollisionEnter(Collision col)
+        {
+            if (col.gameObject.CompareTag("Doctor"))
+            {
+                GameManager.instance.EndGame();
+            }
+        }
     }
 }

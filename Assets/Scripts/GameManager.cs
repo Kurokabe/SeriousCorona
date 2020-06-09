@@ -4,6 +4,7 @@ using UnityEngine;
 using Photon.Pun;
 using Photon.Realtime;
 using TMPro;
+using UnityEngine.UI;
 
 namespace SeriousCorona
 {
@@ -40,6 +41,17 @@ namespace SeriousCorona
 
         private int maskNumber = 0;
         private int bottleNumber = 0;
+
+        [SerializeField]
+        private TextMeshProUGUI endLabel;
+        [SerializeField]
+        private TextMeshProUGUI scoreLabel;
+        [SerializeField]
+        private Image background;
+        [SerializeField]
+        private GameObject endCanvas;
+        [SerializeField]
+        private GameObject playerCanvas;
 
         public int MaskNumber { get => maskNumber; set { maskNumber = value; maskNumberText.text = maskNumber.ToString(); } }
         public int BottleNumber { get => bottleNumber; set { bottleNumber = value; bottleNumberText.text = bottleNumber.ToString(); } }
@@ -188,19 +200,28 @@ namespace SeriousCorona
             }
         }
 
-        public void EndGame()
+        public void EndGame(bool hasBeenCatch=false)
         {
+            playerCanvas.SetActive(false);
+            endCanvas.SetActive(true);
             float infectLevel = 100 - (Mathf.Max(infectionManger.InfectionRate - (maskNumber + bottleNumber), 0));
             int score = maskNumber + bottleNumber;
             float r = Random.value * 100;
-            if(r <= infectLevel)
+            if(r <= infectLevel && !hasBeenCatch)
             {
+                background.color = Color.green;
+                endLabel.text = "You win with";
                 print("You win with a score of " + score);
+                
             }
             else
             {
+                background.color = Color.red;
+                endLabel.text = "You got Coroned, you dumbass";
                 print("You got Coroned, you dumbass");
             }
+            scoreLabel.text = score.ToString();
+            Time.timeScale = 0;
         }
     }
 }
