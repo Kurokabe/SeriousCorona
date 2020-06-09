@@ -11549,6 +11549,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Bed_2
       objectReference: {fileID: 0}
+    - target: {fileID: 1827066897882386, guid: 29f608663d1299f4d8e1cfdad04ddf08, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4128472280720452, guid: 29f608663d1299f4d8e1cfdad04ddf08, type: 3}
       propertyPath: m_LocalPosition.x
       value: 6.5
@@ -17488,7 +17492,7 @@ MonoBehaviour:
   m_DefaultArea: 0
   m_IgnoreNavMeshAgent: 1
   m_IgnoreNavMeshObstacle: 1
-  m_OverrideTileSize: 1
+  m_OverrideTileSize: 0
   m_TileSize: 256
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.1
@@ -19665,6 +19669,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: "SM_Bed_\u04211"
       objectReference: {fileID: 0}
+    - target: {fileID: 1574372512362140, guid: be61fd1275d8c8b4287c930155f44ff7, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4192135004747664, guid: be61fd1275d8c8b4287c930155f44ff7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 24.44
@@ -20855,6 +20863,10 @@ PrefabInstance:
     - target: {fileID: 1827066897882386, guid: 29f608663d1299f4d8e1cfdad04ddf08, type: 3}
       propertyPath: m_Name
       value: "SM_Bed_\u04212"
+      objectReference: {fileID: 0}
+    - target: {fileID: 1827066897882386, guid: 29f608663d1299f4d8e1cfdad04ddf08, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4128472280720452, guid: 29f608663d1299f4d8e1cfdad04ddf08, type: 3}
       propertyPath: m_LocalPosition.x
@@ -25516,6 +25528,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: SM_Couch_A2
       objectReference: {fileID: 0}
+    - target: {fileID: 1225005578700754, guid: d2466cad2f59a2b48bba28e15be9620d, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4989349810733604, guid: d2466cad2f59a2b48bba28e15be9620d, type: 3}
       propertyPath: m_LocalPosition.x
       value: 17.95
@@ -25593,6 +25609,10 @@ PrefabInstance:
     - target: {fileID: 1827066897882386, guid: 29f608663d1299f4d8e1cfdad04ddf08, type: 3}
       propertyPath: m_Name
       value: Bed_1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1827066897882386, guid: 29f608663d1299f4d8e1cfdad04ddf08, type: 3}
+      propertyPath: m_NavMeshLayer
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4128472280720452, guid: 29f608663d1299f4d8e1cfdad04ddf08, type: 3}
       propertyPath: m_LocalPosition.x

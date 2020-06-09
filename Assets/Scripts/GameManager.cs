@@ -230,7 +230,7 @@ namespace SeriousCorona
                 background.color = Color.red;
                 endLabel.text = "You got Coroned, dumbass";
             }
-            scoreLabel.text = score.ToString();
+            scoreLabel.text = "Your score is : " + score;
             Time.timeScale = 0;
         }
         public void QuitGame()
