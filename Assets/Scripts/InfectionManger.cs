@@ -55,7 +55,7 @@ namespace SeriousCorona
         {
             if (col.gameObject.CompareTag("Doctor"))
             {
-                GameManager.instance.EndGame();
+                GameManager.instance.EndGame(hasBeenCatch:true);
             }
         }
     }

@@ -36,7 +36,7 @@ namespace SeriousCorona
         [SerializeField]
         private GameObject spawnPlayer;
 
-        public float PlayerTime = 180f;
+        public float PlayerTime = 10f;
         private InfectionManger infectionManger;
 
         private int maskNumber = 0;
@@ -155,6 +155,7 @@ namespace SeriousCorona
                 remainingTimeText.text = ((int)currentTime).ToString();
             }
             GameStateP = GameState.END;
+            EndGame(noMoreTime:true);            
         }
 
         public void FinishPlanning()
@@ -200,19 +201,29 @@ namespace SeriousCorona
             }
         }
 
-        public void EndGame(bool hasBeenCatch=false)
+        public void EndGame(bool hasBeenCatch=false, bool noMoreTime = false)
         {
             playerCanvas.SetActive(false);
             endCanvas.SetActive(true);
             float infectLevel = 100 - (Mathf.Max(infectionManger.InfectionRate - (maskNumber + bottleNumber), 0));
             int score = maskNumber + bottleNumber;
             float r = Random.value * 100;
-            if(r <= infectLevel && !hasBeenCatch)
+            if(r <= infectLevel && !hasBeenCatch && !noMoreTime)
             {
                 background.color = Color.green;
                 endLabel.text = "You win with";
                 print("You win with a score of " + score);
                 
+            }
+            else if(noMoreTime)
+            {
+                background.color = Color.red;
+                endLabel.text = "You have to return before time reach 0";
+            }
+            else if (hasBeenCatch)
+            {
+                background.color = Color.red;
+                endLabel.text = "A Doctor catch you and kick you butt out of the hospital";
             }
             else
             {
@@ -222,6 +233,14 @@ namespace SeriousCorona
             }
             scoreLabel.text = score.ToString();
             Time.timeScale = 0;
+        }
+        public void QuitGame()
+        {
+            Application.Quit();
+        }
+        public void GoToLauncher()
+        {
+            PhotonNetwork.LoadLevel("Launcher");
         }
     }
 }
