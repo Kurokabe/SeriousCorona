@@ -9,7 +9,7 @@ public class InfectionManger : MonoBehaviour
     private TextMeshProUGUI infectionRateText;
 
     private int infectionRate = 0;
-    public int InfectionRate { get => infectionRate; set { infectionRate = value; infectionRateText.text = infectionRate.ToString() + "%"; } }
+    public int InfectionRate { get => infectionRate; set { infectionRate = value; infectionRateText.text = infectionRate.ToString() + " %"; } }
     
     private double delta = 0.5; 
 
