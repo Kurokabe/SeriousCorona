@@ -158,7 +158,7 @@ namespace SeriousCorona
                 remainingTimeText.text = ((int)currentTime).ToString();
             }
             GameStateP = GameState.END;
-            EndGame(noMoreTime:true);            
+            EndGame(Random.value * 100, noMoreTime:true);            
         }
 
         public void FinishPlanning()
@@ -204,13 +204,12 @@ namespace SeriousCorona
         }
 
         [PunRPC]
-        public void EndGame(bool hasBeenCatch=false, bool noMoreTime = false)
+        public void EndGame(float r,bool hasBeenCatch=false, bool noMoreTime = false)
         {
             playerCanvas.SetActive(false);
             endCanvas.SetActive(true);
             float infectLevel = 100 - (Mathf.Max(InfectionRate - (maskNumber + bottleNumber), 0));
             int score = maskNumber + bottleNumber;
-            float r = Random.value * 100;
             if(r <= infectLevel && !hasBeenCatch && !noMoreTime)
             {
                 background.color = Color.green;

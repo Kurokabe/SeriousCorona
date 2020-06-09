@@ -31,7 +31,7 @@ namespace SeriousCorona
         {
             if (col.gameObject.CompareTag("EndZone") && hasExitEndZone)
             {
-                GameManager.instance.EndGame();
+                GameManager.instance.EndGame(Random.value * 100);
             }
         }
 
@@ -59,7 +59,7 @@ namespace SeriousCorona
         {
             if (col.gameObject.CompareTag("Doctor"))
             {
-                GameManager.instance.EndGame(hasBeenCatch:true);
+                GameManager.instance.EndGame(Random.value * 100, hasBeenCatch:true);
             }
         }
     }
