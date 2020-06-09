@@ -3,32 +3,49 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class InfectionManger : MonoBehaviour
+
+namespace SeriousCorona
 {
-    
-    private TextMeshProUGUI infectionRateText;
+    public class InfectionManger : MonoBehaviour
+    {
 
-    private int infectionRate = 0;
-    public int InfectionRate { get => infectionRate; set { infectionRate = value; infectionRateText.text = infectionRate.ToString() + " %"; } }
-    
-    private double delta = 0.5; 
+        private TextMeshProUGUI infectionRateText;
 
-    void Start(){
-       infectionRateText = GameObject.Find("InfectionRateLabel").GetComponent<TextMeshProUGUI>();
-	}
+        private int infectionRate = 0;
+        public int InfectionRate { get => infectionRate; set { infectionRate = value; infectionRateText.text = infectionRate.ToString() + " %"; } }
 
-    void OnTriggerStay(Collider col){
-        if(col.tag == "enemy"){
-            delta += Time.deltaTime;
-            
-            if(delta >= 1){
-                InfectionRate++;
-                delta = 0;
-			}
-		}
-	}
+        private double delta = 0.5;
 
-    void OnTriggerLeave(Collider col){
-        delta = 0;
-	}
+        void Start()
+        {
+            infectionRateText = GameObject.Find("InfectionRateLabel").GetComponent<TextMeshProUGUI>();
+        }
+
+        void OnTriggerEnter(Collider col)
+        {
+            if (col.gameObject.CompareTag("EndZone"))
+            {
+                GameManager.instance.EndGame();
+            }
+        }
+
+        void OnTriggerStay(Collider col)
+        {
+            if (col.gameObject.CompareTag("enemy"))
+            {
+                delta += Time.deltaTime;
+
+                if (delta >= 1)
+                {
+                    InfectionRate++;
+                    delta = 0;
+                }
+            }
+        }
+
+        void OnTriggerLeave(Collider col)
+        {
+            delta = 0;
+        }
+    }
 }

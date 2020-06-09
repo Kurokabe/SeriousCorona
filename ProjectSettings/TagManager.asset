@@ -6,6 +6,7 @@ TagManager:
   tags:
   - MoveableObj
   - enemy
+  - EndZone
   layers:
   - Default
   - TransparentFX

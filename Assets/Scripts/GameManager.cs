@@ -36,6 +36,7 @@ namespace SeriousCorona
         private GameObject spawnPlayer;
 
         public float PlayerTime = 180f;
+        private InfectionManger infectionManger;
 
         private int maskNumber = 0;
         private int bottleNumber = 0;
@@ -88,6 +89,7 @@ namespace SeriousCorona
                 playerHandler = FindObjectOfType<PlayerHandler>();
                 PhotonNetwork.Instantiate(playerPrefab.name, spawnPlayer.transform.position, spawnPlayer.transform.rotation);
             }
+            infectionManger = FindObjectOfType<InfectionManger>();
             //GameStateP = GameState.PLANNING;
 
         }
@@ -183,6 +185,20 @@ namespace SeriousCorona
             else if (item == "Maskbox")
             {
                 MaskNumber++;
+            }
+        }
+
+        public void EndGame()
+        {
+            float score = (Mathf.Max(infectionManger.InfectionRate - (maskNumber + bottleNumber), 0));
+            float r = Random.value * 100;
+            if(r <= score)
+            {
+                print("You win");
+            }
+            else
+            {
+                print("Vou were too careless, you get Corrona");
             }
         }
     }

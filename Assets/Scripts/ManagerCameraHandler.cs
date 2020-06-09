@@ -21,6 +21,8 @@ namespace SeriousCorona
         {
             if (gameManager.role == Role.MANAGER)
             {
+                Vector3 oldP = transform.position;
+
                 float H = Input.GetAxis("Horizontal") * scale;
                 float V = Input.GetAxis("Vertical") * scale;
 
@@ -36,10 +38,11 @@ namespace SeriousCorona
                     zoomTo = -1f * scaleZoom;
                 }
 
-                //float newY = Mathf.Clamp(transform.position.y + zoomTo, 8f, 50f);
-
-                Vector3 move = new Vector3(H, V, zoomTo);
-                transform.Translate(move);
+                transform.position = new Vector3(
+                                        Mathf.Clamp(oldP.x + H, 2f, 23f),
+                                        Mathf.Clamp(oldP.y - zoomTo, 4f, 12f),
+                                        Mathf.Clamp(oldP.z + V, -24f, 28f)
+                                        );
             }
         }
     }
