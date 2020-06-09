@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8577793821923142430}
   - component: {fileID: 4193884893883795399}
   m_Layer: 0
-  m_Name: CoronedCharachter
+  m_Name: CoronedCharacterSitting
   m_TagString: enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -4810,7 +4810,7 @@ Animator:
   m_GameObject: {fileID: 5209889828991714518}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: e3f6c4200dc0fc74496c5273bbcf8111, type: 3}
-  m_Controller: {fileID: 9100000, guid: 11fd81becef9388488d0cc5270df571d, type: 2}
+  m_Controller: {fileID: 9100000, guid: dc1d99eb550480a41917ea8dc2cf6cfe, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -4826,6 +4826,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 8577793821923142430}
     m_Modifications:
+    - target: {fileID: -8671977129038613269, guid: e3f6c4200dc0fc74496c5273bbcf8111,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.019222675
+      objectReference: {fileID: 0}
+    - target: {fileID: -8671977129038613269, guid: e3f6c4200dc0fc74496c5273bbcf8111,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0.07291834
+      objectReference: {fileID: 0}
     - target: {fileID: -4216859302048453862, guid: e3f6c4200dc0fc74496c5273bbcf8111,
         type: 3}
       propertyPath: m_LocalPosition.x
