@@ -29,16 +29,24 @@ namespace SeriousCorona
         // Update is called once per frame
         void Update()
         {
+            if (playerT == null)
+            {
+                playerT = FindObjectOfType<ThirdPersonCharacter>().transform;
+            }
+
+            if (playerT == null)
+                return;
+
             if (i == 10)
             {
                 i = 0;
                 if (Vector3.Distance(transform.position, playerT.position) < aggroDist)
                 {
                     RaycastHit hit;
-                    if (Physics.Raycast(transform.position, playerT.position - transform.position, out hit, aggroDist, layerMask) 
+                    if (Physics.Raycast(transform.position, playerT.position - transform.position, out hit, aggroDist, layerMask)
                         && hit.collider != null && hit.collider.gameObject.CompareTag("Player"))
                     {
-                        print(hit.collider.gameObject.name);
+                        //print(hit.collider.gameObject.name);
                         agent.destination = playerT.position;
                     }
                 }
