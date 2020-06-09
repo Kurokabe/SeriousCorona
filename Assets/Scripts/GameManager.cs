@@ -201,6 +201,7 @@ namespace SeriousCorona
             }
         }
 
+        [PunRPC]
         public void EndGame(bool hasBeenCatch=false, bool noMoreTime = false)
         {
             playerCanvas.SetActive(false);
