@@ -56,7 +56,7 @@ namespace SeriousCorona
         private GameObject playerCanvas;
 
         public int MaskNumber { get => maskNumber; set { maskNumber = value; maskNumberText.text = maskNumber.ToString(); } }
-        public int BottleNumber { get => bottleNumber; set { bottleNumber = value; bottleNumberText.text = bottleNumber.ToString(); } }
+        public int BottleNumber { get => bottleNumber; set { bottleNumber = value; bottleNumberText.text = bottleNumber.ToString();  } }
         public int InfectionRate { get => infectionRate; set => infectionRate = value; }
 
         private PhotonView view;
@@ -193,12 +193,11 @@ namespace SeriousCorona
         [PunRPC]
         void PickupItem(string item)
         {
-            if (item == "Bottle")
+            if (item.Contains("Bottle"))
             {
-                print("ITEM PICKED : " + item);
                 BottleNumber++;
             }
-            else if (item == "Maskbox")
+            else if (item.Contains("Maskbox"))
             {
                 MaskNumber++;
             }

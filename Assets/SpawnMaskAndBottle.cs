@@ -1,33 +1,39 @@
-﻿using System.Collections;
+﻿using Photon.Pun;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Photon.Pun;
 
-public class SpawnMaskAndBottle : MonoBehaviour
+namespace SeriousCorona
 {
-    public float proba;
-    public GameObject spawnPoints;
-
-    public GameObject prefabMask;
-    public GameObject prefabBottle;
-    
-
-    // Start is called before the first frame update
-    void Start()
+    public class SpawnMaskAndBottle : MonoBehaviour
     {
-        foreach(Transform t in spawnPoints.transform)
+        public float proba;
+        public GameObject spawnPoints;
+
+        public GameObject prefabMask;
+        public GameObject prefabBottle;
+
+
+        // Start is called before the first frame update
+        void Start()
         {
-            float r = Random.value;
-            if(r < proba)
+            if (GameManager.instance.role == Role.MANAGER)
             {
-               PhotonNetwork.Instantiate((r < proba / 2 ? prefabMask.name : prefabBottle.name), t.position, t.rotation);
+                foreach (Transform t in spawnPoints.transform)
+                {
+                    float r = Random.value;
+                    if (r < proba)
+                    {
+                        PhotonNetwork.Instantiate((r < proba / 2 ? prefabMask.name : prefabBottle.name), t.position, t.rotation);
+                    }
+                }
             }
         }
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        // Update is called once per frame
+        void Update()
+        {
+
+        }
     }
 }
